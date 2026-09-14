@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: queue-context
+    runtime: docker
+    plan: 0.5c-512mb
+    region: virginia
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: QUEUE_CONTEXT_DATA_DIR
+        value: /var/data/queue-context
+      - key: QUEUE_CONTEXT_USERNAME
+        value: queuecontext
+      - key: QUEUE_CONTEXT_PASSWORD
+        sync: false
+    disk:
+      name: queue-context-data
+      mountPath: /var/data
+      sizeGB: 1
